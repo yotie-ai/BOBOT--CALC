@@ -3,13 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0b5d68">
 <title>BOBOT-CALC</title>
 <style>
 body{font-family:Arial,sans-serif;background:#eef7f7;margin:0;color:#17343a}
 .box{max-width:480px;margin:auto;padding:18px}
 .header{background:#0b5d68;color:white;padding:20px;border-radius:18px;text-align:center}
 .card{background:white;padding:18px;border-radius:18px;margin-top:15px;box-shadow:0 3px 12px #0001}
-h1{margin:0;font-size:27px} h2{font-size:18px}
+h1{margin:0;font-size:27px}h2{font-size:18px}
 label{display:block;font-weight:bold;font-size:14px;margin-top:12px}
 input{width:100%;padding:13px;margin-top:6px;box-sizing:border-box;border:1px solid #ccd;border-radius:10px;font-size:16px}
 button{width:100%;padding:14px;margin-top:16px;border:0;border-radius:10px;background:#0b5d68;color:white;font-weight:bold;font-size:16px}
@@ -21,73 +23,43 @@ button{width:100%;padding:14px;margin-top:16px;border:0;border-radius:10px;backg
 </head>
 <body>
 <div class="box">
-<div class="header">
-<h1>🐄 BOBOT-CALC</h1>
-<div>RUMI-STEM LAB</div>
-</div>
-
+<div class="header"><h1>🐄 BOBOT-CALC</h1><div>RUMI-STEM LAB</div></div>
 <div class="card">
 <h2>Masukkan Data Sapi</h2>
-
 <label>Kode / ID Sapi</label>
 <input id="id" placeholder="Contoh: SAPI-001">
-
 <label>Lingkar Dada — LD (cm)</label>
 <input id="ld" type="number" placeholder="Contoh: 127">
-
 <label>Panjang Badan — PB (cm)</label>
 <input id="pb" type="number" placeholder="Contoh: 130">
-
 <button onclick="hitung()">HITUNG BOBOT</button>
 </div>
-
 <div class="card" id="hasil" style="display:none">
 <h2>📊 Hasil Estimasi</h2>
-
 <div class="result">Schrool<br><b id="s"></b> kg</div>
 <div class="result">Modifikasi<br><b id="m"></b> kg</div>
 <div class="result">Winter<br><b id="w"></b> kg</div>
-
-<div class="note" style="margin-top:14px">
-Hasil merupakan <b>estimasi</b> berdasarkan rumus pada materi Bab V.
-Gunakan timbangan bila tersedia untuk memperoleh bobot aktual.
+<div class="note" style="margin-top:14px">Hasil merupakan <b>estimasi</b> berdasarkan rumus pada materi Bab V. Gunakan timbangan bila tersedia untuk memperoleh bobot aktual.</div>
 </div>
-</div>
-
-<div class="card">
-<h2>📌 Cara Menggunakan</h2>
-<div class="note">
-1. Masukkan ID sapi.<br>
-2. Ukur Lingkar Dada (LD).<br>
-3. Ukur Panjang Badan (PB).<br>
-4. Masukkan hasil pengukuran dalam cm.<br>
-5. Tekan <b>HITUNG BOBOT</b>.<br>
-6. Bandingkan tiga hasil estimasi.
-</div>
-</div>
-
+<div class="card"><h2>📌 Cara Menggunakan</h2><div class="note">1. Masukkan ID sapi.<br>2. Ukur Lingkar Dada (LD).<br>3. Ukur Panjang Badan (PB).<br>4. Masukkan hasil pengukuran dalam cm.<br>5. Tekan <b>HITUNG BOBOT</b>.<br>6. Bandingkan tiga hasil estimasi.</div></div>
 <div class="footer">BOBOT-CALC • RUMI-STEM LAB<br>#buguruyotie.ai</div>
 </div>
-
 <script>
 function hitung(){
  let ld=parseFloat(document.getElementById("ld").value);
  let pb=parseFloat(document.getElementById("pb").value);
-
- if(!ld || !pb || ld<=0 || pb<=0){
-   alert("Silakan masukkan LD dan PB terlebih dahulu.");
-   return;
- }
-
+ if(!ld||!pb||ld<=0||pb<=0){alert("Silakan masukkan LD dan PB terlebih dahulu.");return;}
  let schrool=Math.pow(ld+22,2)/100;
  let modifikasi=(pb*Math.pow(ld,2))/10840;
  let winter=((Math.pow(ld/2.45,2)*(pb/2.45))/300)*0.45;
-
  document.getElementById("s").innerText=schrool.toFixed(2);
  document.getElementById("m").innerText=modifikasi.toFixed(2);
  document.getElementById("w").innerText=winter.toFixed(2);
  document.getElementById("hasil").style.display="block";
 }
+</script>
+<script>
+if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js"));}
 </script>
 </body>
 </html>

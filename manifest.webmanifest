@@ -1,0 +1,11 @@
+{
+  "name": "BOBOT-CALC",
+  "short_name": "BOBOT-CALC",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eef7f7",
+  "theme_color": "#0b5d68",
+  "description": "Aplikasi sederhana estimasi bobot badan sapi untuk pembelajaran ATR.",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
