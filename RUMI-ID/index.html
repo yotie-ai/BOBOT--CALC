@@ -1,0 +1,707 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#244b3a">
+<meta name="description" content="RUMI-ID - Smart Cattle Identity & Recording System">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>RUMI-ID | SMKN 2 Kerinci</title>
+
+<style>
+:root{
+  --green:#244b3a;
+  --green2:#386b52;
+  --cream:#f7f3e8;
+  --gold:#d6a84f;
+  --ink:#243027;
+  --muted:#66736b;
+  --card:#fff;
+  --line:#dfe6df
+}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--cream);
+  color:var(--ink)
+}
+
+header{
+  background:linear-gradient(145deg,var(--green),var(--green2));
+  color:#fff;
+  padding:22px 16px 20px;
+  border-radius:0 0 24px 24px
+}
+
+.brand{
+  font-weight:800;
+  letter-spacing:.4px;
+  font-size:20px
+}
+
+.sub{
+  opacity:.9;
+  font-size:12px;
+  margin-top:3px
+}
+
+.wrap{
+  max-width:680px;
+  margin:auto;
+  padding:14px
+}
+
+nav{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin:0 0 14px
+}
+
+button,.btn{
+  border:0;
+  border-radius:13px;
+  padding:12px 13px;
+  font-weight:700;
+  font-size:14px;
+  cursor:pointer
+}
+
+.navbtn{
+  background:#fff;
+  border:1px solid var(--line);
+  color:var(--green)
+}
+
+.primary{
+  background:var(--green);
+  color:#fff
+}
+
+.soft{
+  background:#eef3ee;
+  color:var(--green)
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:12px;
+  box-shadow:0 4px 16px #244b3a10
+}
+
+h1{
+  font-size:24px;
+  margin:2px 0 5px
+}
+
+h2{
+  font-size:18px;
+  margin:0 0 12px
+}
+
+p{
+  line-height:1.5
+}
+
+.muted{
+  color:var(--muted);
+  font-size:13px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px
+}
+
+@media(max-width:480px){
+  .grid{grid-template-columns:1fr}
+}
+
+label{
+  display:block;
+  font-size:12px;
+  font-weight:800;
+  margin:10px 0 5px;
+  color:#45534b
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #cfd9d0;
+  border-radius:11px;
+  background:#fff;
+  font:inherit
+}
+
+textarea{
+  min-height:80px;
+  resize:vertical
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#edf4ee;
+  color:var(--green);
+  font-size:11px;
+  font-weight:800
+}
+
+.item{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid var(--line)
+}
+
+.item:last-child{
+  border-bottom:0
+}
+
+.item strong{
+  display:block
+}
+
+.item small{
+  color:var(--muted)
+}
+
+.empty{
+  text-align:center;
+  padding:28px 10px;
+  color:var(--muted)
+}
+
+.qrbox{
+  text-align:center;
+  background:#fafafa;
+  border:1px dashed #cbd6cc;
+  border-radius:14px;
+  padding:14px
+}
+
+.qrbox img{
+  width:190px;
+  height:190px;
+  max-width:70vw;
+  background:#fff
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  padding:18px
+}
+
+.hidden{
+  display:none!important
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:20px;
+  transform:translateX(-50%);
+  background:#1f2d25;
+  color:#fff;
+  padding:11px 15px;
+  border-radius:12px;
+  font-size:13px;
+  z-index:9
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">🐄 RUMI-ID</div>
+    <div class="sub">Smart Cattle Identity & Recording System</div>
+    <div class="sub">RUMI-STEM LAB • RSL-04-RUMI-ID-2026</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<nav>
+  <button class="navbtn" onclick="show('home')">🏠 Beranda</button>
+  <button class="navbtn" onclick="show('form')">➕ Tambah</button>
+  <button class="navbtn" onclick="show('list')">📋 Daftar</button>
+</nav>
+
+<section id="home">
+
+  <div class="card">
+    <span class="badge">V1.0 • OFFLINE-FRIENDLY</span>
+
+    <h1>Satu Sapi. Satu Identitas. Satu Data.</h1>
+
+    <p class="muted">
+      Media pembelajaran recording ternak untuk Program Keahlian
+      Agribisnis Ternak Ruminansia.
+    </p>
+
+    <div class="actions">
+      <button class="primary" onclick="show('form')">
+        + Tambah Sapi
+      </button>
+
+      <button class="soft" onclick="show('list')">
+        Lihat Data
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📌 Cara kerja</h2>
+
+    <p class="muted">
+      Amati sapi → catat identitas → simpan → buka detail →
+      buat QR → hubungkan ke BOBOT-CALC.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>⚖️ Terhubung dengan BOBOT-CALC</h2>
+
+    <p class="muted">
+      RUMI-ID menyimpan identitas. BOBOT-CALC membantu estimasi
+      bobot berdasarkan data pengukuran.
+    </p>
+
+    <button class="primary"
+      onclick="window.open('https://yotie-ai.github.io/BOBOT--CALC/','_blank')">
+      Buka BOBOT-CALC
+    </button>
+  </div>
+
+</section>
+
+<section id="form" class="hidden">
+
+  <div class="card">
+
+    <h2>➕ Tambah Identitas Sapi</h2>
+
+    <p class="muted">
+      Isi data yang benar-benar diamati. Tidak perlu mengisi semua kolom.
+    </p>
+
+    <div class="grid">
+
+      <div>
+        <label>ID Sapi *</label>
+        <input id="id" placeholder="SAPI-001">
+      </div>
+
+      <div>
+        <label>Nama/Panggilan</label>
+        <input id="name" placeholder="Bima">
+      </div>
+
+      <div>
+        <label>Jenis Kelamin</label>
+
+        <select id="sex">
+          <option value="">Pilih</option>
+          <option>Jantan</option>
+          <option>Betina</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Bangsa/Jenis</label>
+        <input id="breed" placeholder="PO">
+      </div>
+
+      <div>
+        <label>Nomor Identifikasi/Ear Tag</label>
+        <input id="tag" placeholder="ET-001">
+      </div>
+
+      <div>
+        <label>Umur</label>
+        <input id="age" placeholder="Contoh: 2 tahun">
+      </div>
+
+    </div>
+
+    <label>Ciri Khusus</label>
+
+    <textarea id="traits"
+      placeholder="Warna bulu, tanda khusus, bentuk, dll."></textarea>
+
+    <label>Catatan</label>
+
+    <textarea id="notes"
+      placeholder="Catatan recording awal"></textarea>
+
+    <div class="actions">
+
+      <button class="primary" onclick="saveCow()">
+        💾 Simpan
+      </button>
+
+      <button class="soft" onclick="show('list')">
+        Batal
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section id="list" class="hidden">
+
+  <div class="card">
+
+    <h2>📋 Daftar Sapi</h2>
+
+    <div id="listBox"></div>
+
+  </div>
+
+</section>
+
+<section id="detail" class="hidden">
+
+  <div class="card">
+
+    <span class="badge">RECORDING SAPI</span>
+
+    <h2 id="dTitle">SAPI</h2>
+
+    <div id="detailBox"></div>
+
+    <div class="actions">
+
+      <button class="primary" onclick="makeQR()">
+        📱 Buat QR
+      </button>
+
+      <button class="soft"
+        onclick="window.open('https://yotie-ai.github.io/BOBOT--CALC/','_blank')">
+        ⚖️ BOBOT-CALC
+      </button>
+
+      <button class="soft" onclick="show('list')">
+        Kembali
+      </button>
+
+    </div>
+
+  </div>
+
+  <div id="qrCard" class="card hidden">
+
+    <h2>📱 QR Identitas</h2>
+
+    <div class="qrbox">
+
+      <img id="qrImg" alt="QR identitas sapi">
+
+      <p id="qrText" class="muted"></p>
+
+      <p class="muted">
+        QR dibuat saat perangkat terhubung internet.
+        Data utama RUMI-ID tetap tersimpan lokal.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  RUMI-ID V1.0 • RUMI-STEM LAB • SMKN 2 KERINCI<br>
+  Yoti Endrianis, A.Md., S.Pd., Gr. • #buguruyotie.ai • 2026
+</footer>
+
+<div id="toast" class="toast hidden"></div>
+
+<script>
+
+const KEY='rumi_id_cows_v1';
+
+let current=null;
+
+const $=id=>document.getElementById(id);
+
+function getData(){
+  try{
+    return JSON.parse(localStorage.getItem(KEY)||'[]')
+  }catch(e){
+    return[]
+  }
+}
+
+function setData(x){
+  localStorage.setItem(KEY,JSON.stringify(x))
+}
+
+function toast(msg){
+  $('toast').textContent=msg;
+  $('toast').classList.remove('hidden');
+
+  setTimeout(
+    ()=>$('toast').classList.add('hidden'),
+    1800
+  )
+}
+
+function show(page){
+
+  ['home','form','list','detail']
+    .forEach(x=>$(x).classList.add('hidden'));
+
+  $(page).classList.remove('hidden');
+
+  if(page==='list'){
+    renderList()
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:'smooth'
+  });
+}
+
+function saveCow(){
+
+  const id=$('id').value.trim();
+
+  if(!id){
+    toast('ID Sapi wajib diisi');
+    return
+  }
+
+  const data=getData();
+
+  if(
+    data.some(
+      c=>c.id.toLowerCase()===id.toLowerCase()
+    )
+  ){
+    toast('ID Sapi sudah ada');
+    return
+  }
+
+  const cow={
+    id,
+    name:$('name').value.trim(),
+    sex:$('sex').value,
+    breed:$('breed').value.trim(),
+    tag:$('tag').value.trim(),
+    age:$('age').value.trim(),
+    traits:$('traits').value.trim(),
+    notes:$('notes').value.trim(),
+    created:new Date().toISOString()
+  };
+
+  data.push(cow);
+
+  setData(data);
+
+  current=cow;
+
+  [
+    'id',
+    'name',
+    'breed',
+    'tag',
+    'age',
+    'traits',
+    'notes'
+  ].forEach(x=>$(x).value='');
+
+  $('sex').value='';
+
+  toast('Data sapi tersimpan');
+
+  openDetail(cow.id);
+}
+
+function renderList(){
+
+  const data=getData();
+
+  const box=$('listBox');
+
+  if(!data.length){
+
+    box.innerHTML=
+      '<div class="empty">'+
+      'Belum ada data sapi.<br>'+
+      'Tambahkan identitas sapi pertama.'+
+      '</div>';
+
+    return
+  }
+
+  box.innerHTML=data.map(c=>
+
+    '<div class="item">'+
+
+      '<div>'+
+        '<strong>'+
+          esc(c.id)+
+          (c.name?' • '+esc(c.name):'')+
+        '</strong>'+
+
+        '<small>'+
+          esc(c.sex||'-')+
+          ' • '+
+          esc(c.breed||'Jenis belum diisi')+
+        '</small>'+
+
+      '</div>'+
+
+      '<button class="soft" '+
+      'onclick="openDetail(\''+
+      js(c.id)+
+      '\')">'+
+      'Buka'+
+      '</button>'+
+
+    '</div>'
+
+  ).join('');
+}
+
+function openDetail(id){
+
+  const cow=getData()
+    .find(c=>c.id===id);
+
+  if(!cow)return;
+
+  current=cow;
+
+  $('dTitle').textContent=
+    (cow.id||'SAPI')+
+    (cow.name?' • '+cow.name:'');
+
+  $('detailBox').innerHTML=`
+
+  <div class="grid">
+
+    <div>
+      <label>Jenis Kelamin</label>
+      <div>${esc(cow.sex||'-')}</div>
+    </div>
+
+    <div>
+      <label>Bangsa/Jenis</label>
+      <div>${esc(cow.breed||'-')}</div>
+    </div>
+
+    <div>
+      <label>Ear Tag/Identifikasi</label>
+      <div>${esc(cow.tag||'-')}</div>
+    </div>
+
+    <div>
+      <label>Umur</label>
+      <div>${esc(cow.age||'-')}</div>
+    </div>
+
+  </div>
+
+  <label>Ciri Khusus</label>
+  <p>${esc(cow.traits||'-')}</p>
+
+  <label>Catatan</label>
+  <p>${esc(cow.notes||'-')}</p>
+
+  `;
+
+  $('qrCard').classList.add('hidden');
+
+  show('detail');
+}
+
+function makeQR(){
+
+  if(!current)return;
+
+  const payload=JSON.stringify({
+
+    app:'RUMI-ID',
+    version:'1.0',
+    id:current.id,
+    name:current.name||'',
+    tag:current.tag||''
+
+  });
+
+  const url=
+    'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+
+    encodeURIComponent(payload);
+
+  $('qrImg').src=url;
+
+  $('qrText').textContent=
+    current.id+
+    ' • '+
+    (current.name||'Tanpa nama');
+
+  $('qrCard').classList.remove('hidden');
+}
+
+function esc(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+    m=>({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#39;'
+    }[m])
+  )
+
+}
+
+function js(s){
+
+  return String(s)
+    .replace(/\\/g,'\\\\')
+    .replace(/'/g,"\\'")
+}
+
+if('serviceWorker' in navigator)
+
+  window.addEventListener(
+    'load',
+    ()=>navigator.serviceWorker.register('./sw.js')
+  );
+
+</script>
+
+</body>
+</html>
